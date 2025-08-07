@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crime Prediction Hub - Predict</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+          url("https://media.istockphoto.com/id/540848970/photo/hacker-attacking-internet.jpg?s=612x612&w=0&k=20&c=P5FCZIihGAP3RPhSaBMSm4379-Kyj80CQE1wbv3gNRs=")
+            no-repeat center center/cover;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      header {
+        background: rgba(0, 0, 0, 0.95);
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ff3333;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+      }
+
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: #ff3333;
+        transition: width 0.3s ease;
+      }
+
+      nav ul li a:hover::after {
+        width: 100%;
+      }
+
+      nav ul li a:hover {
+        color: #ff3333;
+      }
+
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 120px 20px 40px;
+        position: relative;
+      }
+
+      .main-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 51, 51, 0.1) 0%,
+          transparent 70%
+        );
+        z-index: -1;
+      }
+
+      h2 {
+        font-size: 36px;
+        margin-bottom: 25px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+        animation: fadeInDown 1s ease-in-out;
+      }
+
+      .error {
+        color: #ff3333;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-bottom: 8px;
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      input[type="number"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #666;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="number"]:focus {
+        border-color: #ff3333;
+      }
+
+      input[type="submit"] {
+        background: #ff3333;
+        color: #fff;
+        padding: 15px 30px;
+        border-radius: 50px;
+        border: none;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+        animation: pulse 2s infinite;
+        grid-column: 1 / -1;
+        margin-top: 20px;
+      }
+
+      input[type="submit"]:hover {
+        background: #cc0000;
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(255, 51, 51, 0.8);
+      }
+
+      .results {
+        margin-top: 30px;
+        font-size: 20px;
+        text-align: center;
+        animation: fadeInUp 1.2s ease-in-out;
+      }
+
+      footer {
+        background: rgba(0, 0, 0, 0.95);
+        padding: 25px;
+        text-align: center;
+        font-size: 14px;
+        color: #ccc;
+        border-top: 1px solid rgba(255, 51, 51, 0.2);
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(255, 51, 51, 0.9);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+        }
+      }
+
+      @media (max-width: 768px) {
+        h2 {
+          font-size: 28px;
+        }
+
+        header {
+          flex-direction: column;
+          gap: 15px;
+          padding: 15px 20px;
+        }
+
+        nav ul {
+          gap: 20px;
+        }
+
+        input[type="submit"] {
+          padding: 12px 25px;
+          font-size: 16px;
+        }
+
+        form {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Crime Prediction Hub</div>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li>
+            <a href="{{ url_for('predict_datapoint') }}">Predict Crime</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="main-content">
+      <h2>Predict Crime Rate in Urban Areas</h2>
+      {% if error %}
+      <p class="error" id="error">{{ error }}</p>
+      {% endif %}
+      <form action="/predictdata" method="POST">
+        <div class="form-group">
+          <label for="Population Density"
+            >Total Population </label
+          >
+          <input
+            type="number"
+            name="Population Density"
+            id="Population Density"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Unemployment Rate %">Unemployment Rate (%)</label>
+          <input
+            type="number"
+            name="Unemployment Rate %"
+            id="Unemployment Rate %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Police Station Distance km"
+            >Police Station Distance (km)</label
+          >
+          <input
+            type="number"
+            name="Police Station Distance km"
+            id="Police Station Distance km"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Number of Schools">Number of Schools</label>
+          <input
+            type="number"
+            name="Number of Schools"
+            id="Number of Schools"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Average Income">Average Income</label>
+          <input
+            type="number"
+            name="Average Income"
+            id="Average Income"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Age Group Ratio (15-24) %"
+            >Age Group Ratio (15-24) (%)</label
+          >
+          <input
+            type="number"
+            name="Age Group Ratio (15-24) %"
+            id="Age Group Ratio (15-24) %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Age Group Ratio (24-44) %"
+            >Age Group Ratio (24-44) (%)</label
+          >
+          <input
+            type="number"
+            name="Age Group Ratio (24-44) %"
+            id="Age Group Ratio (24-44) %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Age Group Ratio (44+) %">Age Group Ratio (44+) (%)</label>
+          <input
+            type="number"
+            name="Age Group Ratio (44+) %"
+            id="Age Group Ratio (44+) %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Poverty Rate %">Poverty Rate (%)</label>
+          <input
+            type="number"
+            name="Poverty Rate %"
+            id="Poverty Rate %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Police Patrol Frequency">Police Patrol Frequency</label>
+          <input
+            type="number"
+            name="Police Patrol Frequency"
+            id="Police Patrol Frequency"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Good Housing Quality %">Good Housing Quality %</label>
+          <input
+            type="number"
+            name="Good Housing Quality %"
+            id="Good Housing Quality %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Distance to Public Transport km"
+            >Distance to Public Transport km</label
+          >
+          <input
+            type="number"
+            name="Distance to Public Transport km"
+            id="Distance to Public Transport km"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Recreational Facilities">Recreational Facilities</label>
+          <input
+            type="number"
+            name="Recreational Facilities"
+            id="Recreational Facilities"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="School Dropout Rate %">School Dropout Rate %</label>
+          <input
+            type="number"
+            name="School Dropout Rate %"
+            id="School Dropout Rate %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Child Living With Single Parent Rate %"
+            >Child Living With Single Parent Rate %</label
+          >
+          <input
+            type="number"
+            name="Child Living With Single Parent Rate %"
+            id="Child Living With Single Parent Rate %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="CCTV Cameras">CCTV Cameras</label>
+          <input
+            type="number"
+            name="CCTV Cameras"
+            id="CCTV Cameras"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Drug Hospital Admissions">Drug Hospital Admissions</label>
+          <input
+            type="number"
+            name="Drug Hospital Admissions"
+            id="Drug Hospital Admissions"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Emergency Response Time (Mins)"
+            >Emergency Response Time (Mins)</label
+          >
+          <input
+            type="number"
+            name="Emergency Response Time (Mins)"
+            id="Emergency Response Time (Mins)"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Youth Unemployment Rate %"
+            >Youth Unemployment Rate %</label
+          >
+          <input
+            type="number"
+            name="Youth Unemployment Rate %"
+            id="Youth Unemployment Rate %"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Alcohol OutletDensity">Alcohol OutletDensity</label>
+          <input
+            type="number"
+            name="Alcohol OutletDensity"
+            id="Alcohol OutletDensity"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Distance to High Risk_Areas km"
+            >Distance to High Risk_Areas km</label
+          >
+          <input
+            type="number"
+            name="Distance to High Risk_Areas km"
+            id="Distance to High Risk_Areas km"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Mental Health Services Count"></label>
+            Mental Health Services Count</label
+          >
+          <input
+            type="number"
+            name="Mental Health Services Count"
+            id="Mental Health Services Count"
+            step="any"
+            required
+          />
+        </div>
+        <input type="submit" value="Predict" />
+      </form>
+      {% if results %}
+      <div class="results" id="results">
+        Predicted Number of Crimes in Area of Square km: {{ results }}
+      </div>
+      {% endif %}
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Crime Prediction Hub. All rights reserved. <br> Developed By M.Afzal</p>
+    </footer>
+  </body>
+</html>

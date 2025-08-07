@@ -1,0 +1,197 @@
+```
+Feature Descriptions for Pakistan Crime Rate Prediction Dataset
+
+1. Feature: Number of Crimes per Neighborhood
+   - Data Type: Numeric (Integer)
+   - Format: Count of crimes per month in a neighborhood (e.g., 150 crimes/month)
+   - Summary: This is the target variable, representing the total number of reported crimes in a neighborhood. It reflects crime prevalence, which may be influenced by socioeconomic and environmental factors. High values may indicate urban areas with socioeconomic challenges.
+   - Potential Correlation: N/A (target variable)
+   - Common Data Quality Issues: Missing values (e.g., empty cells, "NA"), outliers (e.g., 1000 crimes/month), or negative values (invalid).
+
+2. Feature: Population Density
+   - Data Type: Numeric (Float)
+   - Format: People per square kilometer (e.g., 10000 people/km²)
+   - Summary: Measures population concentration, relevant as high-density areas like Karachi may have more crime due to increased opportunities and anonymity. Positive correlation expected with crime rates.
+   - Potential Correlation: Positive
+   - Common Data Quality Issues: Inconsistent units (e.g., "10000" vs. "10000 people/km²"), missing values, or outliers (e.g., 50000 people/km²).
+
+3. Feature: Unemployment Rate
+   - Data Type: Numeric (Float)
+   - Format: Percentage of working-age population unemployed (e.g., 8%)
+   - Summary: Economic instability from unemployment can drive property crimes or social unrest, especially in urban Pakistan. Positive correlation with crime rates expected.
+   - Potential Correlation: Positive
+   - Common Data Quality Issues: Inconsistent formats (e.g., "8%" vs. "8" vs. "eight"), missing values (e.g., "NA"), or unrealistic values (e.g., 50%).
+
+4. Feature: Police Station Distance
+   - Data Type: Numeric (Float)
+   - Format: Distance in kilometers to nearest police station (e.g., 2.5 km)
+   - Summary: Greater distance may reduce police response times, potentially increasing crime in areas like rural outskirts of Lahore. Positive correlation expected.
+   - Potential Correlation: Positive
+   - Common Data Quality Issues: Mixed formats (e.g., "2.5 km" vs. "2,5 km" vs. "2.5"), missing values, or negative distances (invalid).
+
+5. Feature: Number of Schools
+   - Data Type: Numeric (Integer)
+   - Format: Count of primary/secondary schools (e.g., 2)
+   - Summary: Schools indicate community investment and youth engagement, potentially reducing crime in areas like Islamabad. Negative correlation expected.
+   - Potential Correlation: Negative
+   - Common Data Quality Issues: Missing values, negative counts (invalid), or non-numeric entries (e.g., "two").
+
+6. Feature: Average Income
+   - Data Type: Numeric (Float)
+   - Format: Annual household income in PKR (e.g., 25000 PKR/year)
+   - Summary: Higher income areas often have lower crime rates due to economic stability. Negative correlation expected, though low-income areas like parts of Karachi may have higher crime.
+   - Potential Correlation: Negative
+   - Common Data Quality Issues: Inconsistent units (e.g., "25000" vs. "25000 PKR"), missing values, outliers (e.g., 1000000 PKR), or non-numeric (e.g., "Low").
+
+7. Feature: Age Group Ratio (15–24)
+   - Data Type: Numeric (Float)
+   - Format: Percentage of population aged 15–24 (e.g., 20%)
+   - Summary: Younger age groups are often associated with higher crime involvement, especially in urban Pakistan. Positive correlation expected.
+   - Potential Correlation: Positive
+   - Common Data Quality Issues: Inconsistent formats (e.g., "20%" vs. "20" vs. "0.2"), missing values, or sums exceeding 100% across age groups.
+
+8. Feature: Age Group Ratio (25–44)
+   - Data Type: Numeric (Float)
+   - Format: Percentage of population aged 25–44 (e.g., 40%)
+   - Summary: This working-age group may have mixed effects on crime, depending on employment status. Neutral or weak correlation expected.
+   - Potential Correlation: Neutral
+   - Common Data Quality Issues: Same as Age Group Ratio (15–24).
+
+9. Feature: Age Group Ratio (45+)
+   - Data Type: Numeric (Float)
+   - Format: Percentage of population aged 45 and older (e.g., 40%)
+   - Summary: Older populations are less likely to engage in crime, potentially reducing crime rates. Negative correlation expected.
+   - Potential Correlation: Negative
+   - Common Data Quality Issues: Same as Age Group Ratio (15–24).
+
+10. Feature: Poverty Rate
+    - Data Type: Numeric (Float)
+    - Format: Percentage of households below poverty line (e.g., 30%)
+    - Summary: Poverty drives crime due to economic hardship, common in urban slums. Strong positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Inconsistent formats (e.g., "30%" vs. "0.3"), missing values, or unrealistic values (e.g., 100%).
+
+11. Feature: Income Inequality (Gini Coefficient)
+    - Data Type: Numeric (Float)
+    - Format: Gini coefficient (0 to 1, e.g., 0.4)
+    - Summary: High inequality, common in cities like Karachi, can create social tension, increasing crime. Positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Missing values, invalid values (e.g., >1), or non-numeric (e.g., "High").
+
+12. Feature: Housing Quality (% Substandard Housing)
+    - Data Type: Numeric (Float)
+    - Format: Percentage of homes classified as substandard (e.g., 25%)
+    - Summary: Poor housing conditions indicate social disorganization, linked to higher crime in urban Pakistan. Positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Inconsistent formats (e.g., "25%" vs. "25"), missing values, or negative values (invalid).
+
+13. Feature: Access to Public Transport
+    - Data Type: Numeric (Float)
+    - Format: Number of bus stops per square kilometer (e.g., 10 bus stops/km²)
+    - Summary: High transport access may increase transient populations (raising crime) or improve economic opportunities (lowering crime). Mixed correlation expected.
+    - Potential Correlation: Mixed
+    - Common Data Quality Issues: Inconsistent units (e.g., "10 bus stops/km²" vs. "10"), missing values, or non-numeric (e.g., "Many").
+
+14. Feature: Alcohol Outlet Density
+    - Data Type: Numeric (Float)
+    - Format: Number of alcohol outlets per square kilometer (e.g., 0)
+    - Summary: Alcohol outlets are rare in Pakistan due to cultural restrictions, but informal outlets may contribute to crime. Neutral correlation expected due to low prevalence.
+    - Potential Correlation: Neutral
+    - Common Data Quality Issues: Missing values, invalid counts (e.g., negative), or non-numeric (e.g., "None").
+
+15. Feature: Recreational Facilities
+    - Data Type: Numeric (Integer)
+    - Format: Count of parks/community centers (e.g., 1)
+    - Summary: Access to recreational spaces reduces crime by fostering community engagement. Negative correlation expected.
+    - Potential Correlation: Negative
+    - Common Data Quality Issues: Missing values, negative counts (invalid), or non-numeric (e.g., "Few").
+
+16. Feature: Ethnic Diversity (Shannon Diversity Index)
+    - Data Type: Numeric (Float)
+    - Format: Shannon Diversity Index (e.g., 1.2)
+    - Summary: Diversity, common in cities like Karachi, can affect social cohesion, with mixed effects on crime. Mixed correlation expected.
+    - Potential Correlation: Mixed
+    - Common Data Quality Issues: Non-numeric entries (e.g., "High" vs. 1.2), missing values, or invalid indices (e.g., negative).
+
+17. Feature: Single-Parent Household Rate
+    - Data Type: Numeric (Float)
+    - Format: Percentage of single-parent households (e.g., 35%)
+    - Summary: Economic and social stressors in single-parent households may increase youth delinquency. Positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Inconsistent formats (e.g., "35%" vs. "0.35"), missing values, or negative values (invalid).
+
+18. Feature: Crime Prevention Measures (CCTV Cameras)
+    - Data Type: Numeric (Integer)
+    - Format: Count of CCTV cameras (e.g., 15)
+    - Summary: Surveillance can deter crime but may indicate high-crime areas. Mixed correlation expected.
+    - Potential Correlation: Mixed
+    - Common Data Quality Issues: Missing values, negative counts (invalid), or non-numeric (e.g., "Many").
+
+19. Feature: Drug-Related Hospital Admissions
+    - Data Type: Numeric (Float)
+    - Format: Admissions per 1,000 population (e.g., 20 per 1,000)
+    - Summary: Drug issues, prevalent in some urban areas, are tied to drug-related and property crimes. Strong positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Inconsistent units (e.g., "20 per 1000" vs. "20"), missing values, or negative values (invalid).
+
+20. Feature: Social Cohesion (Voter Turnout)
+    - Data Type: Numeric (Float)
+    - Format: Percentage of voter turnout (e.g., 50%)
+    - Summary: Strong social cohesion, indicated by high voter turnout, reduces crime through collective efficacy. Negative correlation expected.
+    - Potential Correlation: Negative
+    - Common Data Quality Issues: Inconsistent formats (e.g., "50%" vs. "50" vs. "Good"), missing values, or invalid percentages (e.g., >100%).
+
+21. Feature: Urbanization Level (% Built-Up Area)
+    - Data Type: Numeric (Float)
+    - Format: Percentage of land covered by buildings (e.g., 90%)
+    - Summary: Highly urbanized areas, like central Karachi, may have higher crime due to anonymity. Positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Inconsistent formats (e.g., "90%" vs. "0.9"), missing values, or invalid percentages (e.g., >100%).
+
+22. Feature: Youth Unemployment Rate
+    - Data Type: Numeric (Float)
+    - Format: Percentage of unemployed youth aged 16–24 (e.g., 15%)
+    - Summary: Young unemployed individuals are at higher risk of criminal behavior. Strong positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Inconsistent formats (e.g., "15%" vs. "15"), missing values, or unrealistic values (e.g., 80%).
+
+23. Feature: Proximity to High-Risk Areas
+    - Data Type: Numeric (Float)
+    - Format: Distance in kilometers to crime hotspots (e.g., 0.5 km)
+    - Summary: Proximity to hotspots, common in urban Pakistan, may increase crime due to spillover effects. Positive correlation expected.
+    - Potential Correlation: Positive
+    - Common Data Quality Issues: Mixed formats (e.g., "0.5 km" vs. "0.5"), missing values, or negative distances (invalid).
+
+24. Feature: Mental Health Service Accessibility
+    - Data Type: Numeric (Float)
+    - Format: Number of clinics per 1,000 population (e.g., 0.5 clinics/1,000)
+    - Summary: Access to mental health services can mitigate crimes linked to untreated issues. Negative correlation expected.
+    - Potential Correlation: Negative
+    - Common Data Quality Issues: Inconsistent units (e.g., "0.5 clinics/1000" vs. "0.5"), missing values, or negative values (invalid).
+```
+
+### Notes on Artifacts
+- **Raw Data CSV (`pakistan_crime_data.csv`)**:
+  - Contains 300 records for hypothetical Pakistani neighborhoods.
+  - Includes messy data: outliers (e.g., 1000 crimes/month), missing values (e.g., empty cells, "NA"), inconsistent formats (e.g., "2.5 km" vs. "2.5"), and mixed numeric/string values (e.g., "High" for Ethnic Diversity).
+  - Designed for data cleaning practice, requiring handling of units, missing values, outliers, and format standardization.
+  - Reflects Pakistan’s urban context (e.g., high population density in Karachi-like areas, low alcohol outlet density due to cultural norms).
+  - Data cleaning tasks include:
+    - Removing or imputing missing values (e.g., "NA", empty cells).
+    - Standardizing units (e.g., stripping "km" or "%" from numeric fields).
+    - Converting strings to numbers (e.g., "High" to a numeric index).
+    - Detecting and handling outliers (e.g., 1000000 PKR income).
+    - Ensuring age group ratios sum to 100%.
+- **Feature Descriptions (`feature_descriptions.txt`)**:
+  - Lists all 24 features (21 main features, with Age Group Ratios as three sub-features, plus the target).
+  - Provides data type, format, relevance, potential correlation, and data quality issues.
+  - Useful for understanding each feature’s role and preparing for data cleaning and analysis.
+
+### Data Cleaning Practice
+To become a proficient data scientist, you can use this dataset to practice:
+1. **Handling Missing Values**: Impute (e.g., mean/median) or remove rows with "NA", "NULL", or empty cells.
+2. **Standardizing Formats**: Strip units (e.g., "km", "%") and convert strings (e.g., "eight" to 8) using Python (e.g., `pandas`, `regex`).
+3. **Outlier Detection**: Identify and cap/remove outliers (e.g., 1000 crimes/month) using IQR or z-scores.
+4. **Type Conversion**: Convert mixed numeric/string fields (e.g., Ethnic Diversity "High" to a numeric index) using mappings or calculations.
+5. **Validation**: Ensure age group ratios sum to 100% and remove invalid values (e.g., negative counts).
+6. **Feature Engineering**: Derive clean numeric features (e.g
